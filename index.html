@@ -3,68 +3,452 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> $uperRick Airdrop Claim - Get Your Free Tokens!</title>
+    <title>$RICK Token - Official Airdrop | Claim Now</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        * {
             margin: 0;
             padding: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0e27;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .background-animation {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: 
+                radial-gradient(ellipse at top, #1e3a8a 0%, transparent 50%),
+                radial-gradient(ellipse at bottom, #7c3aed 0%, transparent 50%);
+        }
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
         }
 
         .container {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: #888;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #667eea;
+        }
+
+        .hero {
             text-align: center;
-            max-width: 500px;
-            width: 90%;
+            padding: 60px 20px 40px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(102, 126, 234, 0.2);
+            border: 1px solid #667eea;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         h1 {
-            color: #333;
+            font-size: 48px;
             margin-bottom: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .description {
-            color: #666;
+        .subtitle {
+            font-size: 20px;
+            color: #aaa;
+            margin-bottom: 40px;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-box {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .claim-section {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .timer-container {
+            background: rgba(220, 38, 38, 0.1);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            border-radius: 10px;
+            padding: 15px;
             margin-bottom: 30px;
+        }
+
+        .timer-label {
+            color: #fca5a5;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .timer-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .timer-value {
+            font-size: 32px;
+            color: #f87171;
+        }
+
+        .timer-text {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .allocation-info {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .allocation-amount {
+            font-size: 36px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .allocation-usd {
+            color: #22c55e;
+            font-size: 18px;
+        }
+
+        .connect-wallet-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .connect-wallet-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .connect-wallet-btn:hover:before {
+            left: 100%;
+        }
+
+        .connect-wallet-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .connect-wallet-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .wallet-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .wallet-option {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .wallet-option:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #667eea;
+        }
+
+        .requirements {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .requirement-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: #888;
+        }
+
+        .checkmark {
+            color: #22c55e;
+            font-weight: bold;
+        }
+
+        .testimonials {
+            margin: 60px 0;
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .testimonial {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .testimonial-name {
+            font-weight: bold;
+        }
+
+        .testimonial-address {
+            color: #888;
+            font-size: 12px;
+        }
+
+        .testimonial-text {
+            color: #aaa;
             line-height: 1.6;
         }
 
-        .connect-btn {
-            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 18px;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
+        .claim-feed {
+            background: rgba(255,255,255,0.03);
+            border-radius: 15px;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .claim-feed h3 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .claim-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .claim-address {
+            color: #888;
+            font-family: monospace;
+        }
+
+        .claim-amount {
+            color: #22c55e;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .wallet-connected {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            padding: 15px;
+            border-radius: 10px;
             margin-bottom: 20px;
         }
 
-        .connect-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        .processing {
+            text-align: center;
+            padding: 20px;
         }
 
-        .wallet-info {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 20px 0;
-            display: none;
+        .spinner {
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .rickroll-container {
-            display: none;
-            margin-top: 30px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .success-banner {
+            background: linear-gradient(45deg, #22c55e, #10b981);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            font-size: 24px;
+            font-weight: bold;
         }
 
         .video-container {
@@ -72,8 +456,8 @@
             padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
-            border-radius: 10px;
-            margin-top: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
         }
 
         .video-container iframe {
@@ -84,105 +468,378 @@
             height: 100%;
         }
 
-        .success-message {
-            color: #4ECDC4;
-            font-weight: bold;
-            margin: 20px 0;
+        .educational-message {
+            background: rgba(234, 179, 8, 0.1);
+            border: 1px solid rgba(234, 179, 8, 0.3);
+            border-radius: 10px;
+            padding: 25px;
+            line-height: 1.8;
+        }
+
+        .educational-message h3 {
+            color: #fbbf24;
+            margin-bottom: 15px;
+        }
+
+        .warning-list {
+            margin-top: 20px;
+            padding-left: 20px;
+        }
+
+        .warning-list li {
+            margin-bottom: 10px;
+            color: #d1d5db;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+            
+            .timer {
+                gap: 10px;
+                font-size: 18px;
+            }
+            
+            .timer-value {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="background-animation"></div>
+    <div class="stars" id="stars"></div>
+
     <div class="container">
-        <h1>🚀 $uperRick Airdrop Claim 🚀</h1>
-        <p class="description">
-            Connect your wallet to claim your exclusive token airdrop! 
-            Limited time offer for early supporters.
-        </p>
-        
-        <button class="connect-btn" id="connectWallet">
-            🔗 Connect Wallet
-        </button>
+        <header>
+            <div class="logo">
+                🚀 $RICK TOKEN
+            </div>
+            <div class="social-links">
+                <a href="#" onclick="return false;">📱 Twitter</a>
+                <a href="#" onclick="return false;">💬 Discord</a>
+                <a href="#" onclick="return false;">📖 Docs</a>
+            </div>
+        </header>
 
-        <div class="wallet-info" id="walletInfo">
-            <p>✅ Wallet Connected Successfully!</p>
-            <p>Processing your airdrop...</p>
+        <div class="hero">
+            <div class="badge">✨ OFFICIAL AIRDROP - PHASE 1</div>
+            <h1>Claim Your $RICK Tokens</h1>
+            <p class="subtitle">Early adopters receive 50,000 $RICK tokens worth $2,500 USD</p>
+
+            <div class="stats-container">
+                <div class="stat-box">
+                    <div class="stat-value" id="totalClaimed">47,283</div>
+                    <div class="stat-label">Total Claims</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="totalValue">$236M</div>
+                    <div class="stat-label">Total Distributed</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">12,717</div>
+                    <div class="stat-label">Remaining Claims</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">$0.05</div>
+                    <div class="stat-label">Current Price</div>
+                </div>
+            </div>
         </div>
 
-        <div class="rickroll-container" id="rickrollContainer">
-            <div class="success-message">
-                🎉 Airdrop Claimed Successfully! Enjoy your reward! 🎉
+        <div class="claim-section" id="claimSection">
+            <div class="timer-container">
+                <div class="timer-label">⏰ AIRDROP ENDS IN:</div>
+                <div class="timer">
+                    <div class="timer-unit">
+                        <div class="timer-value" id="hours">00</div>
+                        <div class="timer-text">HOURS</div>
+                    </div>
+                    <div class="timer-unit">
+                        <div class="timer-value" id="minutes">00</div>
+                        <div class="timer-text">MINUTES</div>
+                    </div>
+                    <div class="timer-unit">
+                        <div class="timer-value" id="seconds">00</div>
+                        <div class="timer-text">SECONDS</div>
+                    </div>
+                </div>
             </div>
-            <div class="video-container">
-                <iframe 
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
+
+            <div class="allocation-info">
+                <div>Your Eligible Allocation:</div>
+                <div class="allocation-amount">50,000 $RICK</div>
+                <div class="allocation-usd">≈ $2,500 USD</div>
             </div>
-            <p style="margin-top: 15px; color: #666;">
-                Airdrop Guru is a web3 safety experiment. This time, you got a Rickroll. Next time, it could be a drainer. Always make informed decisions. If it seems too good to be true, it usually is. 😄
-            </p>
+
+            <button class="connect-wallet-btn" id="connectBtn">
+                🔗 Connect Wallet to Claim
+            </button>
+
+            <div class="requirements">
+                <div class="requirement-item">
+                    <span class="checkmark">✓</span>
+                    <span>No gas fees required</span>
+                </div>
+                <div class="requirement-item">
+                    <span class="checkmark">✓</span>
+                    <span>Instant token delivery</span>
+                </div>
+                <div class="requirement-item">
+                    <span class="checkmark">✓</span>
+                    <span>Eligible wallet detected</span>
+                </div>
+                <div class="requirement-item">
+                    <span class="checkmark">✓</span>
+                    <span>Verified smart contract</span>
+                </div>
+            </div>
         </div>
+
+        <div class="claim-section hidden" id="processingSection">
+            <div class="wallet-connected">
+                ✅ Wallet Connected Successfully
+            </div>
+            <div class="processing">
+                <div class="spinner"></div>
+                <p>Verifying eligibility...</p>
+                <p style="color: #888; margin-top: 10px;">Checking blockchain records</p>
+            </div>
+        </div>
+
+        <div class="rickroll-container hidden" id="rickrollSection">
+            <div class="success-banner">
+                🎉 Congratulations! Your tokens are ready! 🎉
+            </div>
+            
+            <div class="video-container" style="padding-bottom: 0; height: auto; position: relative; background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 100%); border-radius: 15px; overflow: hidden;">
+                <div id="rickrollAnimation" style="padding: 60px 20px; text-align: center;">
+                    <div style="font-size: 80px; margin-bottom: 20px; animation: spin 2s linear infinite;">
+                        🕺
+                    </div>
+                    <div id="lyrics" style="font-size: 24px; font-weight: bold; line-height: 1.6; min-height: 150px;">
+                        
+                    </div>
+                    <div style="margin-top: 30px;">
+                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="connect-wallet-btn" style="display: inline-block; max-width: 300px; text-decoration: none;">
+                            🎵 Watch Full Video on YouTube
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <style>
+                @keyframes spin {
+                    0% { transform: rotate(0deg) scale(1); }
+                    25% { transform: rotate(90deg) scale(1.2); }
+                    50% { transform: rotate(180deg) scale(1); }
+                    75% { transform: rotate(270deg) scale(1.2); }
+                    100% { transform: rotate(360deg) scale(1); }
+                }
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: translateY(20px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                .lyric-line {
+                    animation: fadeIn 0.5s ease;
+                }
+            </style>
+
+            <div class="educational-message">
+                <h3>🛡️ Web3 Safety Lesson</h3>
+                <p>
+                    <strong>Congratulations!</strong> You just got Rickrolled instead of drained. But this could have been a real crypto drainer stealing your assets.
+                </p>
+                <ul class="warning-list">
+                    <li><strong>🚨 Red Flags You Missed:</strong></li>
+                    <li>❌ Too good to be true ($2,500 free just for connecting)</li>
+                    <li>❌ Fake urgency with countdown timer</li>
+                    <li>❌ Fake social proof (testimonials, claim counters)</li>
+                    <li>❌ No verifiable smart contract address shown</li>
+                    <li>❌ No legitimate social media or documentation</li>
+                    <li>❌ "No gas fees" claim (real transactions require gas)</li>
+                </ul>
+                <p style="margin-top: 20px;">
+                    <strong>🎓 Always research before connecting your wallet:</strong>
+                </p>
+                <ul class="warning-list">
+                    <li>✅ Verify official social media accounts</li>
+                    <li>✅ Check the smart contract on blockchain explorers</li>
+                    <li>✅ Look for community discussion and reviews</li>
+                    <li>✅ Be skeptical of unrealistic rewards</li>
+                    <li>✅ Use hardware wallets for valuable assets</li>
+                    <li>✅ Never share your seed phrase or private keys</li>
+                </ul>
+                <p style="margin-top: 20px; font-size: 18px; color: #fbbf24;">
+                    Stay safe out there! This was just a lesson. Real scammers won't be so kind. 💪
+                </p>
+            </div>
+        </div>
+
+        <div class="claim-feed" id="claimFeed">
+            <h3>🔥 Recent Claims</h3>
+            <div id="claimList"></div>
+        </div>
+
+        <div class="testimonials">
+            <h2>What Early Claimers Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <div class="testimonial-header">
+                        <div class="avatar"></div>
+                        <div>
+                            <div class="testimonial-name">CryptoWhale_42</div>
+                            <div class="testimonial-address">0x7a3f...92d1</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-text">
+                        "Just claimed my 50k $RICK tokens! This is going to moon 🚀 Already up 300% since TGE"
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-header">
+                        <div class="avatar"></div>
+                        <div>
+                            <div class="testimonial-name">DiamondHands</div>
+                            <div class="testimonial-address">0x9c2e...84fa</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-text">
+                        "Can't believe I almost missed this. Easiest $2500 I ever made. Thanks team! 💎"
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-header">
+                        <div class="avatar"></div>
+                        <div>
+                            <div class="testimonial-name">Web3Explorer</div>
+                            <div class="testimonial-address">0x4f1b...53c8</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-text">
+                        "Claimed in under 30 seconds. Zero gas fees. This is what Web3 should be! 🔥"
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>$RICK Token © 2024 | This is a Web3 safety education project</p>
+        </footer>
     </div>
 
     <script>
-        document.getElementById('connectWallet').addEventListener('click', function() {
-            const connectBtn = this;
-            const walletInfo = document.getElementById('walletInfo');
-            const rickrollContainer = document.getElementById('rickrollContainer');
-
-            // Simulate wallet connection
-            connectBtn.disabled = true;
-            connectBtn.textContent = 'Connecting...';
-            
-            setTimeout(() => {
-                // Show wallet connected message
-                walletInfo.style.display = 'block';
-                connectBtn.style.display = 'none';
-                
-                // Simulate airdrop processing
-                setTimeout(() => {
-                    // Show the Rick Roll!
-                    rickrollContainer.style.display = 'block';
-                    walletInfo.style.display = 'none';
-                    
-                    // You can add actual wallet connection logic here
-                    // For example with MetaMask:
-                    // connectRealWallet();
-                }, 2000);
-            }, 1500);
-        });
-
-        // Optional: Real wallet connection with MetaMask
-        async function connectRealWallet() {
-            if (typeof window.ethereum !== 'undefined') {
-                try {
-                    // Request account access
-                    const accounts = await window.ethereum.request({
-                        method: 'eth_requestAccounts'
-                    });
-                    
-                    console.log('Connected account:', accounts[0]);
-                    // You could show the actual wallet address
-                    // document.getElementById('walletAddress').textContent = 
-                    //     'Connected: ' + accounts[0].substring(0, 6) + '...' + accounts[0].substring(38);
-                    
-                } catch (error) {
-                    console.error('User rejected connection:', error);
-                    // Fallback to simulated connection
-                    simulateConnection();
-                }
-            } else {
-                // MetaMask not installed, fallback to simulation
-                simulateConnection();
+        // Create animated stars background
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
             }
         }
 
-        function simulateConnection() {
-            // This is what we're already doing above
-            console.log('Simulating wallet connection...');
+        // Countdown timer
+        function startCountdown() {
+            const endTime = new Date().getTime() + (5 * 60 * 60 * 1000); // 5 hours from now
+            
+            const timer = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = endTime - now;
+                
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            }, 1000);
         }
+
+        // Fake claim feed
+        function generateFakeClaims() {
+            const claimList = document.getElementById('claimList');
+            const addresses = [
+                '0x7a3f...92d1', '0x9c2e...84fa', '0x4f1b...53c8', 
+                '0x2d8a...71b3', '0x6e9c...45d2', '0x1a7f...89c4',
+                '0x8b3d...62e1', '0x3c5a...94f7', '0x9d1e...37b8'
+            ];
+            
+            function addClaim() {
+                const claim = document.createElement('div');
+                claim.className = 'claim-item';
+                const randomAddress = addresses[Math.floor(Math.random() * addresses.length)];
+                claim.innerHTML = `
+                    <span class="claim-address">${randomAddress}</span>
+                    <span class="claim-amount">+50,000 $RICK</span>
+                `;
+                claimList.insertBefore(claim, claimList.firstChild);
+                
+                // Keep only last 10 claims
+                if (claimList.children.length > 10) {
+                    claimList.removeChild(claimList.lastChild);
+                }
+
+                // Increment counter
+                const counter = document.getElementById('totalClaimed');
+                const current = parseInt(counter.textContent.replace(/,/g, ''));
+                counter.textContent = (current + 1).toLocaleString();
+            }
+            
+            // Add initial claims
+            for (let i = 0; i < 5; i++) {
+                addClaim();
+            }
+            
+            // Add new claims periodically
+            setInterval(addClaim, Math.random() * 5000 + 3000);
+        }
+
+        // Wallet connection
+        document.getElementById('connectBtn').addEventListener('click', function() {
+            const claimSection = document.getElementById('claimSection');
+            const processingSection = document.getElementById('processingSection');
+            const rickrollSection = document.getElementById('rickrollSection');
+
+            // Hide claim section
+            claimSection.classList.add('hidden');
+            
+            // Show processing
+            processingSection.classList.remove('hidden');
+
+            // After 3 seconds, show rickroll
+            setTimeout(() => {
+                processingSection.classList.add('hidden');
+                rickrollSection.classList.remove('hidden');
+                
+                // Scroll to rickroll
+                rickrollSection.scrollIntoView({ behavior: 'smooth' });
+            }, 3000);
+        });
+
+        // Play video button
+        document.getElementById('playVideoBtn').addEventListener('click', function() {
+            const video = document.getElementById('rickrollVideo');
+            // Load video with autoplay when button is clicked (this works better than auto-loading)
+            video.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&controls=1&rel=0';
+            this.style.display = 'none';
+        });
+
+        // Initialize
+        createStars();
+        startCountdown();
+        generateFakeClaims();
     </script>
 </body>
 </html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airdrop Claim - Get Your Free Tokens!</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .description {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .connect-btn {
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .connect-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .wallet-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .rickroll-container {
+            display: none;
+            margin-top: 30px;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .success-message {
+            color: #4ECDC4;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Exclusive Airdrop Claim 🚀</h1>
+        <p class="description">
+            Connect your wallet to claim your exclusive token airdrop! 
+            Limited time offer for early supporters.
+        </p>
+        
+        <button class="connect-btn" id="connectWallet">
+            🔗 Connect Wallet
+        </button>
+
+        <div class="wallet-info" id="walletInfo">
+            <p>✅ Wallet Connected Successfully!</p>
+            <p>Processing your airdrop...</p>
+        </div>
+
+        <div class="rickroll-container" id="rickrollContainer">
+            <div class="success-message">
+                🎉 Airdrop Claimed Successfully! Enjoy your reward! 🎉
+            </div>
+            <div class="video-container">
+                <iframe 
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <p style="margin-top: 15px; color: #666;">
+                Just kidding! But you've been Rick Rolled! 😄
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('connectWallet').addEventListener('click', function() {
+            const connectBtn = this;
+            const walletInfo = document.getElementById('walletInfo');
+            const rickrollContainer = document.getElementById('rickrollContainer');
+
+            // Simulate wallet connection
+            connectBtn.disabled = true;
+            connectBtn.textContent = 'Connecting...';
+            
+            setTimeout(() => {
+                // Show wallet connected message
+                walletInfo.style.display = 'block';
+                connectBtn.style.display = 'none';
+                
+                // Simulate airdrop processing
+                setTimeout(() => {
+                    // Show the Rick Roll!
+                    rickrollContainer.style.display = 'block';
+                    walletInfo.style.display = 'none';
+                    
+                    // You can add actual wallet connection logic here
+                    // For example with MetaMask:
+                    // connectRealWallet();
+                }, 2000);
+            }, 1500);
+        });
+
+        // Optional: Real wallet connection with MetaMask
+        async function connectRealWallet() {
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    // Request account access
+                    const accounts = await window.ethereum.request({
+                        method: 'eth_requestAccounts'
+                    });
+                    
+                    console.log('Connected account:', accounts[0]);
+                    // You could show the actual wallet address
+                    // document.getElementById('walletAddress').textContent = 
+                    //     'Connected: ' + accounts[0].substring(0, 6) + '...' + accounts[0].substring(38);
+                    
+                } catch (error) {
+                    console.error('User rejected connection:', error);
+                    // Fallback to simulated connection
+                    simulateConnection();
+                }
+            } else {
+                // MetaMask not installed, fallback to simulation
+                simulateConnection();
+            }
+        }
+
+        function simulateConnection() {
+            // This is what we're already doing above
+            console.log('Simulating wallet connection...');
+        }
+    </script>
+</body>
+</html>
